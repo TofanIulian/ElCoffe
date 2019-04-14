@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+  <a class="navbar-brand" href="#">Angular</a>
+  <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault"
+    aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>Files</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" href="#">HTML</a>
+          <a class="dropdown-item" href="#">TS</a>
+          <a class="dropdown-item" href="#">JS</a>
+        </div>
+      </li>
+      <li>
+        <button class="btn btn-primary" (click)="openVerticallyCentered(login)">Special Login Made for GUCI</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<ng-template #login let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{register ? 'Register' : 'Login'}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm">
+      <div *ngIf="user && !register">
+        <mat-form-field>
+          <input matInput placeholder="Username" name="username" [(ngModel)]="user.username" required type="text">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password" name="password" [(ngModel)]="user.password" required type="password">
+        </mat-form-field>
+      </div>
+      <div *ngIf="user && register">
+          <mat-form-field>
+            <input matInput placeholder="Username" name="username" [(ngModel)]="user.username" required type="text">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Password" name="password" [(ngModel)]="user.password" required type="password">
+          </mat-form-field>
+        </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="register ? registerFunc() : register = true" [disabled]="register ? form.invalid : false" style="float: left">Register</button>
+    <button type="button" class="btn btn-success" (click)="register == false ? login() : register = false" [disabled]="!register ? form.invalid : false">{{register ? 'Back to Login' : 'Autentificare'}}</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

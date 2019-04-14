@@ -1,0 +1,78 @@
+<ngb-carousel *ngIf="images">
+  <ng-template *ngFor="let image of images" ngbSlide>
+    <div class="item">
+      <img [src]="image" alt="Random first slide">
+      <div class="carousel-caption">
+        <h3>10 seconds between slides...</h3>
+        <p>This carousel uses customized default values.</p>
+      </div>
+    </div>
+  </ng-template>
+  <!-- <ng-template ngbSlide>
+    <img [src]="images[1]" alt="Random second slide">
+    <div class="carousel-caption">
+      <h3>No mouse events...</h3>
+      <p>This carousel doesn't pause or resume on mouse events</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img [src]="images[2]"  alt="Random third slide">
+    <div class="carousel-caption">
+      <h3>No keyboard...</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img [src]="images[3]" alt="Random fourth slide">
+    <div class="carousel-caption">
+      <h3>And no wrap after last slide.</h3>
+      <p>This carousel uses customized default values.</p>
+    </div>
+  </ng-template> -->
+</ngb-carousel>
+
+
+
+<div class='body-content'>
+  <div class="row">
+    <div *ngFor="let offer of offers" class="col-12 col-md-6 col-lg-3 offer">
+      <app-small-description-card></app-small-description-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="h-200">
+          <app-info-card title="REZERVA O MASA" description="Vezi ce mese mai avem libere si rezervo direct online" buttonText="REZERVA ACUM" type="red"></app-info-card>
+      </div>
+      <div class="row h-200">
+        <div class="col-lg-6">
+          <app-info-card title="ELCOFFE TRACKER" description="Urmărește stadiul comenzii tale în timp real folosind ElCoffe Tracker"
+            buttonText="URMĂREȘTE COMANDA TA ACUM" type="red"></app-info-card>
+        </div>
+        <div class="col-lg-6">
+          <app-info-card title="DESCARCĂ MENIUL" description="Vezi meniul și ofertele noastre noi cu un simplu click!" buttonText="DESCARCA ACUM" type="white"></app-info-card>
+        </div>
+      </div>
+      <div class="h-200">
+          <app-info-card title="ÎNSCRIE-TE LA NEWSLETTERUL NOSTRU" description="Înscrie-te la newsletterul nostru să fii primul care află despre ofertele noastre!"
+            buttonText="INSCRIE-TE" type="white"></app-info-card>
+      </div>
+    </div>
+    <div class="col-lg-4 h-640">
+      <app-info-card title="ELCOFFE'S PIZZA APP" description="Coming out soon">
+        <div class="row mobile">
+          <div class="col-4">
+              <img src="assets/images/apple.svg" alt="" class="offer-ribbon">
+          </div>
+          <div class="col-4">
+              <span class="and">&</span>
+          </div>
+          <div class="col-4">
+              <img src="assets/images/android.svg" alt="" class="offer-ribbon">
+          </div>
+        </div>
+        
+        <img src="assets/images/store.png" alt="" class="app-store">
+      </app-info-card>
+    </div>
+  </div>

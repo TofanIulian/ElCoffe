@@ -1,0 +1,49 @@
+.card {
+    transform: scale(1);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    transition: all 0.2s ease-in-out
+}
+.offer{
+    padding: 0 15px 15px;
+}
+.offer-img {
+    width: 100%;
+}
+
+.offer-ribbon {
+    width: 150px;
+    height: 36px;
+    margin: -20px auto 15px;
+    position: relative;
+}
+
+.offer-title {
+    height: 50px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #0073aa;
+}
+
+.offer-divider {
+    height: 2px;
+    width: 145px;
+    background-color: #d7d7d7;
+    margin: 10px auto 15px;
+}
+
+.offer-description {
+    height: 90px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 55px;
+}
+
+.offer-btn {
+    width: 92%;
+    /* background-color: #609e29; */
+}

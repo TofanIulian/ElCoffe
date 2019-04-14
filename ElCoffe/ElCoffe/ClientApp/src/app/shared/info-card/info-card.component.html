@@ -1,0 +1,6 @@
+<div [class]="'card ' + type">
+  <h3 >{{title}}</h3>
+  <p class="info-description">{{description}}</p>
+  <button *ngIf="buttonText != ''" [class]="'btn info-button ' + (type == 'white' ? 'btn-success' : (type == 'blue' || type == 'red' ? 'btn-light' : ''))">{{buttonText}}</button>
+  <ng-content></ng-content>
+</div>

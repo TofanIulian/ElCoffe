@@ -1,0 +1,47 @@
+.card {
+    margin-bottom: 20px;
+    text-align: center;
+    height: 100%;
+    padding: 15px 15px 0;
+}
+
+.info-description {
+    padding: 5px 15px 29px;
+    margin: 0 !important;
+}
+
+.info-button {
+    width: 85%;
+    margin: 0 auto;
+}
+
+.black {
+    color: #fff;
+    background: #323232;
+}
+
+.white {
+    background: #fff;
+}
+
+.white h3{
+    color: #006491;
+}
+
+.white p{
+    color: #0073aa;
+}
+
+.blue {
+    background: #007bff;
+    color: #fff
+}
+
+.blue button{
+    color: #0f74a8;
+}
+
+.red {
+    background: #BE1E2D;
+    color: #fff
+}
