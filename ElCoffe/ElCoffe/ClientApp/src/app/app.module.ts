@@ -17,9 +17,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SmallDescriptionCardComponent } from './shared/small-description-card/small-description-card.component';
 import { InfoCardComponent } from './shared/info-card/info-card.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material';
+import {MatInputModule, MatIconModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import { ReservationComponent } from './reservation/reservation.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FetchDataComponent,
     CardComponent,
     SmallDescriptionCardComponent,
-    InfoCardComponent
+    InfoCardComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,7 +43,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     NgbModule,
     MatFormFieldModule,
     MatInputModule,
-    BrowserAnimationsModule
+    MatIconModule,
+    BrowserAnimationsModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-.footer {
+/* .footer {
     background-color: rgba(0,0,0,0.95);
 	box-shadow: 0px 0px 20px black;
     color: white;
@@ -18,4 +18,36 @@ ul { zoom: 1; }
 ul li {
     list-style: none;
     float: left;
+} */
+
+footer {
+    background-color: #28a745 !important;
+    color: white;
+}
+.flex-center img{
+    max-width: 75px;
+}
+.footer-copyright {
+    background-color: rgba(0,0,0,.2);
+}
+.footer-copyright a{
+    color: lightblue !important
+}
+
+.flex-center div{
+    width: 20%;
+    display: inline-block;
+
+}
+.flex-center div a{
+    margin: 0 auto
+}
+
+.flex-center div:first-child{
+    margin-left: 10%
+
+}
+
+.flex-center div:last-child{
+    width: 10%;
 }

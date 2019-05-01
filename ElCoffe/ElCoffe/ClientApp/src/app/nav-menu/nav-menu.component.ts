@@ -22,6 +22,7 @@ export class NavMenuComponent implements OnInit {
 
   login() {
     alert("guci socks coc");
+    console.log("goci")
   }
 
   registerFunc() {

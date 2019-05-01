@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-info-card',
@@ -12,10 +12,15 @@ export class InfoCardComponent implements OnInit {
   @Input() buttonText = ""
   @Input() buttonURL = ""
   @Input() type = "black"
+  @Output() buttonClick: EventEmitter<any> = new EventEmitter() 
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  buttonFunc() {
+    this.buttonClick.emit(null);
   }
 
 }

@@ -15,13 +15,13 @@
         </div>
       </li>
       <li>
-        <button class="btn btn-primary" (click)="openVerticallyCentered(login)">Special Login Made for GUCI</button>
+        <button class="btn btn-primary" (click)="openVerticallyCentered(loginTemplate)">Special Login Made for GUCI</button>
       </li>
     </ul>
   </div>
 </nav>
 
-<ng-template #login let-modal>
+<ng-template #loginTemplate let-modal>
   <div class="modal-header">
     <h4 class="modal-title">{{register ? 'Register' : 'Login'}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -49,8 +49,8 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="register ? registerFunc() : register = true" [disabled]="register ? form.invalid : false" style="float: left">Register</button>
-    <button type="button" class="btn btn-success" (click)="register == false ? login() : register = false" [disabled]="!register ? form.invalid : false">{{register ? 'Back to Login' : 'Autentificare'}}</button>
+    <button type="button" class="btn btn-success" (click)="register ? registerFunc() : register = true" [disabled]="register ? form.invalid : false">Register</button>
+    <button type="button" class="btn btn-success" (click)="!register ? login() : register = false" [disabled]="!register ? form.invalid : false">{{register ? 'Back to Login' : 'Autentificare'}}</button>
     <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Close</button>
   </div>
 </ng-template>

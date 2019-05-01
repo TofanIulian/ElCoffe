@@ -42,7 +42,8 @@
   <div class="row">
     <div class="col-lg-8">
       <div class="h-200">
-          <app-info-card title="REZERVA O MASA" description="Vezi ce mese mai avem libere si rezervo direct online" buttonText="REZERVA ACUM" type="red"></app-info-card>
+        <app-info-card title="REZERVA O MASA" description="Vezi ce mese mai avem libere si rezervo direct online" buttonText="REZERVA ACUM"
+          type="red"></app-info-card>
       </div>
       <div class="row h-200">
         <div class="col-lg-6">
@@ -50,29 +51,60 @@
             buttonText="URMĂREȘTE COMANDA TA ACUM" type="red"></app-info-card>
         </div>
         <div class="col-lg-6">
-          <app-info-card title="DESCARCĂ MENIUL" description="Vezi meniul și ofertele noastre noi cu un simplu click!" buttonText="DESCARCA ACUM" type="white"></app-info-card>
+          <app-info-card title="DESCARCĂ MENIUL" description="Vezi meniul și ofertele noastre noi cu un simplu click!" buttonText="DESCARCA ACUM"
+            type="white"></app-info-card>
         </div>
       </div>
       <div class="h-200">
-          <app-info-card title="ÎNSCRIE-TE LA NEWSLETTERUL NOSTRU" description="Înscrie-te la newsletterul nostru să fii primul care află despre ofertele noastre!"
-            buttonText="INSCRIE-TE" type="white"></app-info-card>
+        <app-info-card title="ÎNSCRIE-TE LA NEWSLETTERUL NOSTRU" description="Înscrie-te la newsletterul nostru să fii primul care află despre ofertele noastre!"
+          buttonText="INSCRIE-TE" type="white" (buttonClick)="openModal(newsletter)"></app-info-card>
       </div>
     </div>
     <div class="col-lg-4 h-640">
       <app-info-card title="ELCOFFE'S PIZZA APP" description="Coming out soon">
         <div class="row mobile">
           <div class="col-4">
-              <img src="assets/images/apple.svg" alt="" class="offer-ribbon">
+            <img src="assets/images/apple.svg" alt="" class="offer-ribbon">
           </div>
           <div class="col-4">
-              <span class="and">&</span>
+            <span class="and">&</span>
           </div>
           <div class="col-4">
-              <img src="assets/images/android.svg" alt="" class="offer-ribbon">
+            <img src="assets/images/android.svg" alt="" class="offer-ribbon">
           </div>
         </div>
-        
+
         <img src="assets/images/store.png" alt="" class="app-store">
       </app-info-card>
     </div>
   </div>
+</div>
+
+
+
+<ng-template #newsletter let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Newsletter</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm">
+      <div *ngIf="newsletterUser">
+        <mat-form-field>
+          <input matInput placeholder="email" name="email" [(ngModel)]="newsletterUser.email" required type="text">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="firstName" name="firstName" [(ngModel)]="newsletterUser.firstName" required type="text">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="lastName" name="lastName" [(ngModel)]="newsletterUser.lastName" required>
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Aboneaza-te</button>
+  </div>
+</ng-template>
