@@ -21,8 +21,11 @@ export class UsersService {
 
     getAll() {
         console.log("ici")
-        var str
-        this.http.get<string>(this.baseUrl + 'api/Users/GetAll')
+        var str;
+        this.http.get<string>(this.baseUrl + 'api/Users/GetAll').subscribe(result => {
+            str = result;
+            console.log(str)
+        },error => console.error(error));
         
     } 
 
