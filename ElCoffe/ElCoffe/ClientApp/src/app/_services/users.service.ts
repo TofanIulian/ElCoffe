@@ -37,9 +37,13 @@ export class UsersService {
         
     // } 
 
-    getAll (): Observable<User[]> {
+    getAll (): User[] {
+        var users
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        return this.http.get<User[]>(this.baseUrl + 'api/Users/GetAll', { headers: headers })
+         this.http.get<User[]>(this.baseUrl + 'api/Users/GetAll', { headers: headers }).subscribe(result => {
+            users = result; console.log(users)
+                   }, error => console.error(error));
+                   return users;
       }
 
     // getByUsername(username:String): Observable<User[]> {
