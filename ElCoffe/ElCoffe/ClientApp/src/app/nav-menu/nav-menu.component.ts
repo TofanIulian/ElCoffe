@@ -29,6 +29,7 @@ export class NavMenuComponent implements OnInit {
   getall() {
     this.userService.getAll().subscribe((users: User[]) => {
       this.users = users;
+      console.log(this.users)
       this.notificationService.success("tofi");
     },
       error => {
@@ -57,7 +58,15 @@ export class NavMenuComponent implements OnInit {
   }
 
   registerFunc() {
-    alert("guci socks coc");
+    this.userService.register(this.user).subscribe((user: User) => {
+      this.user = user;
+      console.log(this.user)
+      this.notificationService.success("tofi");
+    },
+      error => {
+        this.notificationService.handleError(error);
+      });;
+
   }
 }
 

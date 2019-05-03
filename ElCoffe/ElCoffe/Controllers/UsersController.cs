@@ -57,7 +57,7 @@ namespace ElCoffe.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> Create(User user)
+        public async Task<ActionResult<User>> Create([FromBody]User user)
         {
             db.Users.Add(user);
             await db.SaveChangesAsync();
