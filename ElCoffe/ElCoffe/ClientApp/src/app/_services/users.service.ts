@@ -14,6 +14,14 @@ export class UsersService {
         this.baseUrl = baseUrl;
     }
 
+    login(user: User): User {
+        var result
+        this.http.get<User>(this.baseUrl + 'api/Users/Login/' + user).subscribe(result => {
+            result = result;
+          }, error => console.error(error));
+        return result;
+    }
+
     getByUsername(username:String): Observable<User> {
         console.log(this.http.get<User>(this.baseUrl + 'api/Users/GetByUsername/'+username))
         return this.http.get<User>(this.baseUrl + 'api/Users/GetByUsername/'+username)
@@ -22,7 +30,9 @@ export class UsersService {
     getAll() {
         console.log("ici")
         var str
-        this.http.get<string>(this.baseUrl + 'api/Users/GetAll')
+        this.http.get<string>(this.baseUrl + 'api/Users/GetAll').subscribe(result => {
+            str = result; console.log(str)
+          }, error => console.error(error));
         
     } 
 

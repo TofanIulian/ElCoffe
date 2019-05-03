@@ -28,9 +28,8 @@ export class NavMenuComponent implements OnInit {
 
   login() {
 
-    this.userService.getByUsername(this.user.username);
-    alert("guci socks coc");
-    console.log(this.user.username)
+    this.user = this.userService.login(this.user);
+    console.log(this.user)
   }
 
   registerFunc() {
@@ -39,6 +38,6 @@ export class NavMenuComponent implements OnInit {
 }
 
 class User {
-  username?: String;
-  password?: String;
+  username?: string;
+  password?: string;
 }
