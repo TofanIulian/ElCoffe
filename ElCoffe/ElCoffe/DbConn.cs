@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using ElCoffe.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 
 namespace ElCoffe
 {
@@ -31,6 +33,19 @@ namespace ElCoffe
         //{
         //    base.OnConfiguring(optionsBuilder);
         //}
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                IConfigurationRoot configuration = new ConfigurationBuilder()
+                   .SetBasePath(Directory.GetCurrentDirectory())
+                   .AddJsonFile("appsettings.json")
+                   .Build();
+                //var connectionString = configuration.GetConnectionString("DbCoreConnectionString");
+                optionsBuilder.UseSqlServer("Server=.;Database=ElCoffe;Trusted_Connection=True;MultipleActiveResultSets=true");
+            }
+        }
     }
 
     public class ToDoContextFactory : IDesignTimeDbContextFactory<DbConn>
@@ -42,4 +57,5 @@ namespace ElCoffe
             return new DbConn(builder.Options);
         }
     }
+    
 }
