@@ -13,12 +13,12 @@ namespace ElCoffe.Controllers
     {
         private DbConn db = new DbConn();
         //GET: Users
-       [HttpGet("[action]")]
-        public int GetAll()
-        {
-            var users = db.Users;
-            return 2;
-        }
+       //[HttpGet("[action]")]
+       // public int GetAll()
+       // {
+       //     var users = db.Users;
+       //     return 2;
+       // }
         /*
          o functie login care returneaza un boolean care primeste un UserDTO :username,parola
          verific daca exista un user cu acel username si cu acea parola
@@ -37,7 +37,7 @@ namespace ElCoffe.Controllers
 
         // GET: api/Todo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
             return await db.Users.ToListAsync();
         }
