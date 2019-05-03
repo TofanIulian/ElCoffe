@@ -24,7 +24,7 @@ export class NavMenuComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
-  users: Observable<User[]>
+  users: User[]
   getall(){
     this.users = this.userService.getAll();
     console.log(this.userService.getAll())
