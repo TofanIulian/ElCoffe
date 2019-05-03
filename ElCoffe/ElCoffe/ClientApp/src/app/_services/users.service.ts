@@ -14,13 +14,9 @@ export class UsersService {
         this.baseUrl = baseUrl;
     }
 
-    login(user: User): User {
+    login(user: User): Observable<User> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        var result
-        this.http.post<User>(this.baseUrl + 'api/Users/Login', JSON.stringify(user),{ headers: headers }).subscribe(result => {
-            result = result;
-          }, error => console.error(error));
-        return result;
+        return this.http.post<User>(this.baseUrl + 'api/Users/Login', JSON.stringify(user),{ headers: headers })
     }
 
     getByUsername(username:String): Observable<User> {
@@ -37,13 +33,9 @@ export class UsersService {
         
     // } 
 
-    getAll (): User[] {
-        var users
+    getAll (): Observable<User[]> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-         this.http.get<User[]>(this.baseUrl + 'api/Users/GetAll', { headers: headers }).subscribe(result => {
-            users = result; console.log(users)
-                   }, error => console.error(error));
-                   return users;
+        return this.http.get<User[]>(this.baseUrl + 'api/Users', { headers: headers })
       }
 
     // getByUsername(username:String): Observable<User[]> {

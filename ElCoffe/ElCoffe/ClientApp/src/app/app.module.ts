@@ -1,3 +1,4 @@
+import { NotificationService } from './_services/notification.service';
 import { AppConfig } from './app.config';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -51,7 +52,7 @@ import { OrdersService } from './_services/orders.service';
     DragDropModule
    
   ],
-  providers: [ UsersService, OrdersService, AppConfig],
+  providers: [ UsersService, OrdersService, NotificationService, AppConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
