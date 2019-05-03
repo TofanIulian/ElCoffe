@@ -10,6 +10,10 @@ namespace ElCoffe
 {
     public class DbConn : DbContext
     {
+        public DbConn()
+        {
+
+        }
         public DbConn(DbContextOptions<DbConn> options) : base(options)
         {
 

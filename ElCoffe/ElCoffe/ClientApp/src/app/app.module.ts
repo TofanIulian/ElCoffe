@@ -20,7 +20,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule, MatIconModule} from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ReservationComponent } from './reservation/reservation.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { UsersService } from './_services/users.service';
+import { OrdersService } from './_services/orders.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,8 +48,9 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatIconModule,
     BrowserAnimationsModule,
     DragDropModule
+   
   ],
-  providers: [],
+  providers: [ UsersService, OrdersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

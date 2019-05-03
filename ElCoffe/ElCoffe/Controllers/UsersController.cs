@@ -1,93 +1,109 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using ElCoffe.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
+using Microsoft.AspNetCore.Routing;
 
 namespace ElCoffe.Controllers
 {
+    [Route("api/Users")]
     public class UsersController : Controller
     {
+        private DbConn db = new DbConn();
         // GET: Users
-        public ActionResult Index()
+        public ActionResult GetAll()
         {
-            return View();
+            var users = db.Users;
+            return View(users.ToList());
         }
 
         // GET: Users/Details/5
-        public ActionResult Details(int id)
+        [HttpGet("GetByUsername/{username}")]
+        public ActionResult GetByUsername(string username)
         {
-            return View();
-        }
+            User user = db.Users
+                      .Where(s => s.Username == username)
+                      .FirstOrDefault<User>();
+            //User user = db.Users.Find(username);
+            if(user == null)
+            {
+                //return HttpNotFound();
+            }
 
-        // GET: Users/Create
-        public ActionResult Create()
-        {
-            return View();
+            return View(user);
         }
 
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(User user)
         {
             try
             {
                 // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    return RedirectToAction(nameof(GetAll));
+                }
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("","Unable to save changes. Try again, and if the problem persists see your system admin");
             }
-        }
 
-        // GET: Users/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            return View(user);
         }
 
         // POST: Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id,User user)
         {
             try
             {
                 // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    db.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("GetAll");
+                }
+                return RedirectToAction(nameof(GetAll));
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system admin");
             }
-        }
 
-        // GET: Users/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+            return View(user);
         }
 
         // POST: Users/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
-            try
-            {
                 // TODO: Add delete logic here
+                User user = db.Users.Find(id);
+                db.Users.Remove(user);
+                db.SaveChanges();
+                return RedirectToAction(nameof(GetAll));
+        }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
             {
-                return View();
+                db.Dispose();
             }
+            base.Dispose(disposing);
         }
     }
 }

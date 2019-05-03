@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { UsersService } from '../_services/users.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -11,7 +12,8 @@ export class NavMenuComponent implements OnInit {
   user: User = new User();
   register = false;
 
-  constructor(private modalService: NgbModal) {}
+  constructor(private modalService: NgbModal,
+    private userService: UsersService) {}
 
   ngOnInit() {
   }
@@ -21,8 +23,10 @@ export class NavMenuComponent implements OnInit {
   }
 
   login() {
+
+    this.userService.getByUsername(this.user.username);
     alert("guci socks coc");
-    console.log("goci")
+    console.log(this.user.username)
   }
 
   registerFunc() {

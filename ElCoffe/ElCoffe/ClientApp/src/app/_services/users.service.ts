@@ -2,17 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '../../../node_modules/@angular/core';
 import { Inject } from '@angular/core';
 import { Observable } from '../../../node_modules/rxjs';
-import { Order } from '../_models/order.interface';
+import { User } from '../_models/user.interface';
 @Injectable()
 
-export class OrdersService {
+export class UsersService {
 
-    @Inject('BASE_URL') baseUrl: string
+  @Inject('BASE_URL') baseUrl: string;
 
     constructor(private http: HttpClient) {}
 
-    getAll(): Observable<Order[]> {
-        return this.http.get<Order[]>(this.baseUrl + 'api/Orders/GetAll')
+    getByUsername(username:String): Observable<User[]> {
+        return this.http.get<User[]>(this.baseUrl + 'api/Users/GetByUsername'+username)
     }  
 
 }

@@ -15,7 +15,7 @@ namespace ElCoffe.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
-        public bool Admin { get; set; }
-        //public bool curier { get; set; }
+        public bool Admin { get; set; } = false;
+        //public bool curier { get; set; } = false;
     }
 }
