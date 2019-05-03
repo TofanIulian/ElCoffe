@@ -28,7 +28,7 @@ namespace ElCoffe.Controllers
 
              */
         [HttpPost("Login")]
-        public User Login(User user)
+        public User Login([FromBody]User user)
         {
             User _user = db.Users
                       .Where(s => s.Username == user.Username && s.Password == user.Password)
@@ -36,6 +36,71 @@ namespace ElCoffe.Controllers
             return _user;
         }
 
+        /*
+
+        // GET: api/Todo
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TodoItem>>> GetTodoItems()
+        {
+            return await _context.TodoItems.ToListAsync();
+        }
+
+        // GET: api/Todo/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<TodoItem>> GetTodoItem(long id)
+        {
+            var todoItem = await _context.TodoItems.FindAsync(id);
+
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            return todoItem;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<User>> Create(User user)
+        {
+            db.Users.Add(user);
+            await db.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetTodoItem), new { id = user.Id }, user);
+        }
+
+        // PUT: api/Todo/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutTodoItem(long id, TodoItem item)
+        {
+            if (id != item.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(item).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        // DELETE: api/Todo/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTodoItem(long id)
+        {
+            var todoItem = await _context.TodoItems.FindAsync(id);
+
+            if (todoItem == null)
+            {
+                return NotFound();
+            }
+
+            _context.TodoItems.Remove(todoItem);
+            await _context.SaveChangesAsync();
+
+            return NoContent();
+        }*/
+
+        /*
         // POST: Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -102,6 +167,6 @@ namespace ElCoffe.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
-        }
+        }*/
     }
 }
