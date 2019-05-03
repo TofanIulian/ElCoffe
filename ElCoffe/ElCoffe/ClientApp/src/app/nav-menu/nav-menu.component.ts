@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../_services/users.service';
 import { User } from '../_models/user.interface';
-import { Observable } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-nav-menu',
@@ -26,8 +25,7 @@ export class NavMenuComponent implements OnInit {
 
   users: User[]
   getall(){
-    this.users = this.userService.getAll();
-    console.log(this.userService.getAll())
+    this.userService.getAll();
   }
 
   login() {
