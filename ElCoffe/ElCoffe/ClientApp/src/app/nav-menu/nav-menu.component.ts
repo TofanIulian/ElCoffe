@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../_services/users.service';
+import { User } from '../_models/user.interface';
 
 @Component({
   selector: 'app-nav-menu',
@@ -27,7 +28,14 @@ export class NavMenuComponent implements OnInit {
   }
 
   login() {
-
+    console.log(this.user)
+    this.user.id = 0;
+    this.user.address = "";
+    this.user.email = "";
+    this.user.firstName = "";
+    this.user.lastName = "";
+    this.user.phoneNumber = "";
+    this.user.admin = false;
     this.user = this.userService.login(this.user);
     console.log(this.user)
   }
@@ -37,7 +45,5 @@ export class NavMenuComponent implements OnInit {
   }
 }
 
-class User {
-  username?: string;
-  password?: string;
-}
+
+

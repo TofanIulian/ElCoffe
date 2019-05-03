@@ -15,8 +15,9 @@ export class UsersService {
     }
 
     login(user: User): User {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
         var result
-        this.http.get<User>(this.baseUrl + 'api/Users/Login/' + user).subscribe(result => {
+        this.http.post<User>(this.baseUrl + 'api/Users/Login', JSON.stringify(user),{ headers: headers }).subscribe(result => {
             result = result;
           }, error => console.error(error));
         return result;

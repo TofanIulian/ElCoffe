@@ -15,25 +15,25 @@ namespace ElCoffe.Controllers
     public class UsersController : Controller
     {
         private DbConn db = new DbConn();
-        // GET: Users
-        //[HttpGet("[action]")]
-        //public int GetAll()
-        //{
-        //    var users = db.Users.F;
-        //    return users.ToList();
-        //}
+        //GET: Users
+       [HttpGet("[action]")]
+        public int GetAll()
+        {
+            var users = db.Users;
+            return 2;
+        }
         /*
          o functie login care returneaza un boolean care primeste un UserDTO :username,parola
          verific daca exista un user cu acel username si cu acea parola
 
              */
-        [HttpGet("GetByUsername/{username}")]
-        public User Login(User usr)
+        [HttpPost("Login")]
+        public User Login(User user)
         {
-            User user = db.Users
-                      .Where(s => s.Username == usr.Username && s.Password == usr.Password)
+            User _user = db.Users
+                      .Where(s => s.Username == user.Username && s.Password == user.Password)
                       .FirstOrDefault<User>();
-            return user;
+            return _user;
         }
 
         // POST: Users/Create
