@@ -1,3 +1,4 @@
+import { AppConfig } from './app.config';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -50,7 +51,7 @@ import { OrdersService } from './_services/orders.service';
     DragDropModule
    
   ],
-  providers: [ UsersService, OrdersService],
+  providers: [ UsersService, OrdersService, AppConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

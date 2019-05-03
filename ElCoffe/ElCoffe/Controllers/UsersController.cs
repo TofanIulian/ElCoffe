@@ -11,20 +11,21 @@ using Microsoft.AspNetCore.Routing;
 
 namespace ElCoffe.Controllers
 {
-    [Route("api/Users")]
+    [Route("api/[controller]")]
     public class UsersController : Controller
     {
         private DbConn db = new DbConn();
         // GET: Users
-        public ActionResult GetAll()
+        [HttpGet("[action]")]
+        public int GetAll()
         {
             var users = db.Users;
-            return View(users.ToList());
+            return 2;
         }
 
         // GET: Users/Details/5
         [HttpGet("GetByUsername/{username}")]
-        public ActionResult GetByUsername(string username)
+        public User GetByUsername(string username)
         {
             User user = db.Users
                       .Where(s => s.Username == username)
@@ -35,7 +36,7 @@ namespace ElCoffe.Controllers
                 //return HttpNotFound();
             }
 
-            return View(user);
+            return user;
         }
 
         // POST: Users/Create

@@ -22,6 +22,10 @@ export class NavMenuComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
+  getall(){
+    this.userService.getAll();
+  }
+
   login() {
 
     this.userService.getByUsername(this.user.username);
