@@ -28,13 +28,14 @@ export class UsersService {
         return this.http.get<User>(this.baseUrl + 'api/Users/GetByUsername/'+username)
     }  
 
-    // getAll() {
-    //     console.log("ici")
-    //     var str
-    //     this.http.get<string>(this.baseUrl + 'api/Users/GetAll').subscribe(result => {
-    //         str = result; console.log(str)
-    //       }, error => console.error(error));
+    getAll() {
+        console.log("ici")
+        var str
+        this.http.get<string>(this.baseUrl + 'api/Users/GetAll').subscribe(result => {
+            str = result; console.log(str)
+          }, error => console.error(error));
         
+<<<<<<< HEAD
     // } 
 
     getAll (): User[] {
@@ -45,6 +46,9 @@ export class UsersService {
                    }, error => console.error(error));
                    return users;
       }
+=======
+    } 
+>>>>>>> parent of f18d860... go
 
     // getByUsername(username:String): Observable<User[]> {
     //     console.log(this.http.get<User[]>(this.baseUrl + 'api/Users/GetByUsername'+username))
