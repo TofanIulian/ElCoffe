@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../_services/users.service';
 import { User } from '../_models/user.interface';
+import { Observable } from '../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-nav-menu',
@@ -23,8 +24,10 @@ export class NavMenuComponent implements OnInit {
     this.modalService.open(content, { centered: true });
   }
 
+  users: Observable<User[]>
   getall(){
-    this.userService.getAll();
+    this.users = this.userService.getAll();
+    console.log(this.userService.getAll())
   }
 
   login() {
