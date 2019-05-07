@@ -1,12 +1,24 @@
-<div class="card">
+<div *ngIf="!isNew" class="card">
   <img [src]="imgsrc" alt="" class="offer-img">
   <div class="offer text-center">
-    <img src="assets/images/offer.svg" alt="" class="offer-ribbon">
-    <p class="offer-title">{{title}}</p>
+    <img *ngIf="isOffer" src="assets/images/offer.svg" alt="" class="offer-ribbon">
+    <p class="offer-title">{{product ? product.title : title}}</p>
     <p class="offer-divider"></p>
-    <p class="offer-description">{{description}}</p>
+    <p class="offer-description">{{product ? product.description : description}}</p>
     <button class="btn btn-success offer-btn">
       ALEGE!!
+    </button>
+  </div>
+</div>
+
+<div *ngIf="isNew" class="card">
+  <img [src]="" alt="" class="offer-img">
+  <div class="offer text-center">
+    <p class="offer-title"></p>
+    <p class="offer-divider"></p>
+    <p class="offer-description"></p>
+    <button class="btn btn-success offer-btn" (click)="buttonFunc()">
+      <i class="fa fa-plus"></i> Add New
     </button>
   </div>
 </div>

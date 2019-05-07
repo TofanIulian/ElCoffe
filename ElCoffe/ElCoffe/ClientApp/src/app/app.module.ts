@@ -25,6 +25,8 @@ import { ReservationComponent } from './reservation/reservation.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { UsersService } from './_services/users.service';
 import { OrdersService } from './_services/orders.service';
+import { MenuComponent } from './menu/menu.component';
+import { ProductsService } from './_services/product.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +39,8 @@ import { OrdersService } from './_services/orders.service';
     CardComponent,
     SmallDescriptionCardComponent,
     InfoCardComponent,
-    ReservationComponent
+    ReservationComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,7 +55,7 @@ import { OrdersService } from './_services/orders.service';
     DragDropModule
    
   ],
-  providers: [ UsersService, OrdersService, NotificationService, AppConfig],
+  providers: [ UsersService, OrdersService, NotificationService, ProductsService, AppConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

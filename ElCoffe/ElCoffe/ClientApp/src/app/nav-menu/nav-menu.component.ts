@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '../../../node_modules/@ng-bootstrap/ng-bootstrap';
 import { UsersService } from '../_services/users.service';
@@ -13,12 +14,15 @@ export class NavMenuComponent implements OnInit {
   isNavbarCollapsed = true;
   user: User = new User();
   register = false;
+  currentUser: User;
 
-  constructor(private modalService: NgbModal,
+  constructor(private router: Router,
+    private modalService: NgbModal,
     private userService: UsersService,
     private notificationService: NotificationService) { }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   openVerticallyCentered(content) {
@@ -47,14 +51,19 @@ export class NavMenuComponent implements OnInit {
     this.user.phoneNumber = "";
     this.user.admin = false;
     this.userService.login(this.user).subscribe((user: User) => {
-        this.user = user;
-        console.log(this.user)
-        this.notificationService.success("tofi");
-      },
-        error => {
-          this.notificationService.handleError(error);
-        });;
-    
+      this.currentUser = user;
+      this.notificationService.success("loged In");
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    },
+      error => {
+        this.notificationService.handleError(error);
+      });
+
+  }
+
+  logout() {
+    localStorage.removeItem('currentGame');
+    this.currentUser = null;
   }
 
   registerFunc() {
@@ -67,6 +76,10 @@ export class NavMenuComponent implements OnInit {
         this.notificationService.handleError(error);
       });;
 
+  }
+
+  goToMenu(){
+    this.router.navigate(['/menu']);
   }
 }
 

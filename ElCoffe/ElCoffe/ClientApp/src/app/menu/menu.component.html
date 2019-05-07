@@ -1,0 +1,75 @@
+
+<div class='body-content'>
+  <div class="row">
+    <div *ngFor="let product of products" class="col-12 col-md-6 col-lg-3 offer">
+      <app-small-description-card product="product" (buttonClick)="getProductById(product.id); openModal(editProduct)"></app-small-description-card>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 offer">
+      <app-small-description-card isNew="true" (buttonClick)="openModal(newProduct)"></app-small-description-card>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #newProduct let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">New Product</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #form="ngForm">
+        <div *ngIf="newProduct">
+          <mat-form-field>
+            <input matInput placeholder="Name" name="name" [(ngModel)]="newProduct.name" required type="text">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Description" name="description" [(ngModel)]="newProduct.description" required type="text">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput placeholder="Price" name="price" [(ngModel)]="newProduct.price" required>
+          </mat-form-field>
+          <mat-form-field>
+              <input matInput placeholder="Weight" name="weight" [(ngModel)]="newProduct.weight" required>
+            </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="createProduct(); modal.close('Close click')">Add</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cloase</button>
+    </div>
+  </ng-template>
+
+  <ng-template #editProduct let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">New Product</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #form="ngForm">
+          <div *ngIf="selectedProduct">
+            <mat-form-field>
+              <input matInput placeholder="Name" name="name" [(ngModel)]="selectedProduct.name" required type="text">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Description" name="description" [(ngModel)]="selectedProduct.description" required type="text">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput placeholder="Price" name="price" [(ngModel)]="selectedProduct.price" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Weight" name="weight" [(ngModel)]="selectedProduct.weight" required>
+              </mat-form-field>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="updateProduct(); modal.close('Close click')">Save</button>
+        <button type="button" class="btn btn-danger" [disabled]="form.invalid" (click)="deleteProduct(); modal.close('Close click')">Delete</button>
+        <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cloase</button>
+      </div>
+    </ng-template>
