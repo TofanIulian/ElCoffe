@@ -34,14 +34,14 @@ export class ProductsService {
         return this.http.post<Product>(this.baseUrl + 'api/Products', JSON.stringify(product), { headers: headers })
     }
     
-    delete (id): Observable<boolean> {
+    delete (id): Observable<any> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        return this.http.put<boolean>(this.baseUrl + 'api/Products/' + id, { headers: headers })
+        return this.http.delete<any>(this.baseUrl + 'api/Products/' + id, { headers: headers })
     }
 
-    update (product: Product): Observable<Product> {
+    update (product: Product): Observable<any> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
-        return this.http.put<Product>(this.baseUrl + 'api/Products', JSON.stringify(product), { headers: headers })
+        return this.http.put<any>(this.baseUrl + 'api/Products', JSON.stringify(product), { headers: headers })
     }
 
 

@@ -40,8 +40,8 @@ export class MenuComponent implements OnInit {
   }
 
   updateProduct() {
-    this.productService.update(this.selectedProduct).subscribe((product: Product) => {
-      this.selectedProduct = product;
+    this.productService.update(this.selectedProduct).subscribe((result) => {
+      console.log(result);
       this.getAllProducts();
     },
       error => {
@@ -60,10 +60,8 @@ export class MenuComponent implements OnInit {
   }
 
   deleteProduct(){
-    this.productService.delete(this.selectedProduct.id).subscribe((result: boolean) => {
-      if(result)
-        console.log("succcess delete");
-        
+    this.productService.delete(this.selectedProduct.id).subscribe((result) => {
+        console.log(result);
       this.getAllProducts();
     },
       error => {
