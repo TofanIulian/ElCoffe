@@ -2,92 +2,73 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ElCoffe.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElCoffe.Controllers
 {
+    [Route("api/[controller]")]
     public class ProductsController : Controller
     {
-        // GET: Products
-        public ActionResult Index()
+        private DbConn db = new DbConn();
+
+        // GET: api/Todo
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
-            return View();
+            return await db.Products.ToListAsync();
         }
 
-        // GET: Products/Details/5
-        public ActionResult Details(int id)
+        // GET: api/Todo/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Product>> GetProduct(long id)
         {
-            return View();
+            var product = await db.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return product;
         }
 
-        // GET: Products/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Products/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult<Product>> Create([FromBody]Product product)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            db.Products.Add(product);
+            await db.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
-        // GET: Products/Edit/5
-        public ActionResult Edit(int id)
+        // PUT: api/Todo/
+        [HttpPut]
+        public async Task<IActionResult> UpdateProduct([FromBody]Product product)
         {
-            return View();
+            db.Entry(product).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return NoContent();
         }
 
-        // POST: Products/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE: api/Todo/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(long id)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var product = await db.Products.FindAsync(id);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (product == null)
             {
-                return View();
+                return NotFound();
             }
-        }
 
-        // GET: Products/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            db.Products.Remove(product);
+            await db.SaveChangesAsync();
 
-        // POST: Products/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return NoContent();
         }
     }
 }

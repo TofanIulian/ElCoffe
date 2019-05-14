@@ -2,16 +2,16 @@
 <div class='body-content'>
   <div class="row">
     <div *ngFor="let product of products" class="col-12 col-md-6 col-lg-3 offer">
-      <app-small-description-card product="product" (buttonClick)="getProductById(product.id); openModal(editProduct)"></app-small-description-card>
+      <app-small-description-card [(product)]="product" (buttonClick)="getProductById(product.id); openModal(editProduct)"></app-small-description-card>
     </div>
     <div class="col-12 col-md-6 col-lg-3 offer">
-      <app-small-description-card isNew="true" (buttonClick)="openModal(newProduct)"></app-small-description-card>
+      <app-small-description-card isNew="true" (buttonClick)="openModal(newProductModal)"></app-small-description-card>
     </div>
   </div>
 </div>
 
 
-<ng-template #newProduct let-modal>
+<ng-template #newProductModal let-modal>
     <div class="modal-header">
       <h4 class="modal-title">New Product</h4>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

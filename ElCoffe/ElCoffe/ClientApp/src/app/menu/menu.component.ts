@@ -12,7 +12,7 @@ import { NotificationService } from '../_services/notification.service';
 export class MenuComponent implements OnInit {
   products: Product[];
   selectedProduct: Product;
-  newProduct: Product;
+  newProduct: Product =new Product();
   constructor(private modalService: NgbModal,
     private productService: ProductsService,
     private notificationService: NotificationService) { }
@@ -24,6 +24,7 @@ export class MenuComponent implements OnInit {
   getAllProducts() {
     this.productService.getAll().subscribe((products: Product[]) => {
       this.products = products;
+      console.log(this.products)
     },
       error => {
         this.notificationService.handleError(error);
@@ -50,7 +51,8 @@ export class MenuComponent implements OnInit {
   }
 
   createProduct() {
-    this.productService.update(this.newProduct).subscribe((product: Product) => {
+    console.log(this.newProduct)
+    this.productService.create(this.newProduct).subscribe((product: Product) => {
       this.selectedProduct = product;
       this.getAllProducts();
     },

@@ -42,6 +42,7 @@ export class ProductsService {
     update (product: Product): Observable<any> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
         return this.http.put<any>(this.baseUrl + 'api/Products', JSON.stringify(product), { headers: headers })
+        console.log("update")
     }
 
 

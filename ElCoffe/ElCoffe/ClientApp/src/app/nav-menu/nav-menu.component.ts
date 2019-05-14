@@ -52,6 +52,7 @@ export class NavMenuComponent implements OnInit {
     this.user.admin = false;
     this.userService.login(this.user).subscribe((user: User) => {
       this.currentUser = user;
+      this.goToMenu()
       this.notificationService.success("loged In");
       localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
     },

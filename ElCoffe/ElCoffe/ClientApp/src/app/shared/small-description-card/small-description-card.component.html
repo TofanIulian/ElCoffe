@@ -2,10 +2,10 @@
   <img [src]="imgsrc" alt="" class="offer-img">
   <div class="offer text-center">
     <img *ngIf="isOffer" src="assets/images/offer.svg" alt="" class="offer-ribbon">
-    <p class="offer-title">{{product ? product.title : title}}</p>
+    <p class="offer-title">{{product ? product.name : title}}</p>
     <p class="offer-divider"></p>
     <p class="offer-description">{{product ? product.description : description}}</p>
-    <button class="btn btn-success offer-btn">
+    <button class="btn btn-success offer-btn" (click)="buttonFunc()">
       ALEGE!!
     </button>
   </div>

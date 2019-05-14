@@ -1,93 +1,91 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using ElCoffe.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElCoffe.Controllers
 {
+
+    [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
-        // GET: Categories
-        public ActionResult Index()
+        private DbConn db = new DbConn();
+
+
+        [HttpPost("Verificare")]
+        public Category Verificare([FromBody]Category categ)
         {
-            return View();
+            Category _categ = db.Categories
+                      .Where(s => s.Id == categ.Id && s.Name == categ.Name)
+                      .FirstOrDefault<Category>();
+            return _categ;
         }
 
-        // GET: Categories/Details/5
-        public ActionResult Details(int id)
+
+
+        // GET: api/Todo
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Category>>> GetAll()
         {
-            return View();
+            return await db.Categories.ToListAsync();
         }
 
-        // GET: Categories/Create
-        public ActionResult Create()
+        // GET: api/Todo/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Category>> GetCategory(long id)
         {
-            return View();
+            var categ = await db.Categories.FindAsync(id);
+
+            if (categ == null)
+            {
+                return NotFound();
+            }
+
+            return categ;
         }
 
-        // POST: Categories/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult<Category>> Create([FromBody]Category categ)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            db.Categories.Add(categ);
+            await db.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return CreatedAtAction(nameof(GetCategory), new { id = categ.Id }, categ);
         }
 
-        // GET: Categories/Edit/5
-        public ActionResult Edit(int id)
+        // PUT: api/Todo/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutCategory(long id, Category categ)
         {
-            return View();
+            if (id != categ.Id)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(categ).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return NoContent();
         }
 
-        // POST: Categories/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE: api/Todo/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory(long id)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var categ = await db.Categories.FindAsync(id);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (categ == null)
             {
-                return View();
+                return NotFound();
             }
-        }
 
-        // GET: Categories/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            db.Categories.Remove(categ);
+            await db.SaveChangesAsync();
 
-        // POST: Categories/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return NoContent();
         }
     }
 }
