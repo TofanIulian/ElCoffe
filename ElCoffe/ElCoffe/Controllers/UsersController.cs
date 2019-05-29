@@ -64,16 +64,11 @@ namespace ElCoffe.Controllers
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
         }
-
-        // PUT: api/Todo/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(long id, User user)
+        
+        // PUT: api/Todo/
+        [HttpPut]
+        public async Task<IActionResult> UpdateProduct([FromBody]User user)
         {
-            if (id != user.Id)
-            {
-                return BadRequest();
-            }
-
             db.Entry(user).State = EntityState.Modified;
             await db.SaveChangesAsync();
 

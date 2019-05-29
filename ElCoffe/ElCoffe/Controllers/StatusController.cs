@@ -1,93 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+using ElCoffe.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 
 namespace ElCoffe.Controllers
 {
-    public class StatusController : Controller
+    [Route("api/[controller]")]
+    public class StatusesController : Controller
     {
-        // GET: Status
-        public ActionResult Index()
+        private DbConn db = new DbConn();
+
+        // GET: api/Todo
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Status>>> GetAll()
         {
-            return View();
+            return await db.Statuses.ToListAsync();
         }
 
-        // GET: Status/Details/5
-        public ActionResult Details(int id)
+        // GET: api/Todo/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Status>> GetStatus(long id)
         {
-            return View();
+            var sts = await db.Statuses.FindAsync(id);
+
+            if (sts == null)
+            {
+                return NotFound();
+            }
+
+            return sts;
         }
 
-        // GET: Status/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Status/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult<Status>> Create([FromBody]Status sts)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            db.Statuses.Add(sts);
+            await db.SaveChangesAsync();
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return CreatedAtAction(nameof(GetStatus), new { id = sts.Id }, sts);
         }
 
-        // GET: Status/Edit/5
-        public ActionResult Edit(int id)
+        // PUT: api/Todo/5
+        [HttpPut]
+        public async Task<IActionResult> UpdateReservation(Status sts)
         {
-            return View();
+            db.Entry(sts).State = EntityState.Modified;
+            await db.SaveChangesAsync();
+
+            return NoContent();
         }
 
-        // POST: Status/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE: api/Todo/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteStatus(long id)
         {
-            try
-            {
-                // TODO: Add update logic here
+            var sts = await db.Statuses.FindAsync(id);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (sts == null)
             {
-                return View();
+                return NotFound();
             }
-        }
 
-        // GET: Status/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            db.Statuses.Remove(sts);
+            await db.SaveChangesAsync();
 
-        // POST: Status/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return NoContent();
         }
     }
 }

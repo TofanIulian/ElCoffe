@@ -1,0 +1,41 @@
+<div class='body-content'>
+  
+  <button class="btn btn-primary" (click)="openModal(newStatusModal)">Adauga Status nou</button>
+  <table style="width: 100%" mat-table [dataSource]="statuses" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+<ng-template #newStatusModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">New Status</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #form="ngForm">
+        <div *ngIf="newStatus">
+          <mat-form-field>
+            <input matInput placeholder="Name" name="name" [(ngModel)]="newStatus.name" required type="text">
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="createStatus(); modal.close('Close click')">Add</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cloase</button>
+    </div>
+  </ng-template>

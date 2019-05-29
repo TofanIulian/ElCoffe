@@ -41,7 +41,7 @@ export class NavMenuComponent implements OnInit {
       });
   }
 
-  login() {
+  login(modal) {
     console.log(this.user)
     this.user.id = 0;
     this.user.address = "";
@@ -49,12 +49,15 @@ export class NavMenuComponent implements OnInit {
     this.user.firstName = "";
     this.user.lastName = "";
     this.user.phoneNumber = "";
-    this.user.admin = false;
+    this.user.isAdmin = false;
+    this.user.isCourier = false;
+    this.user.isEmployee = false;
     this.userService.login(this.user).subscribe((user: User) => {
       this.currentUser = user;
       this.goToMenu()
       this.notificationService.success("loged In");
       localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+      modal.close('Close click'); 
     },
       error => {
         this.notificationService.handleError(error);
@@ -63,7 +66,8 @@ export class NavMenuComponent implements OnInit {
   }
 
   logout() {
-    localStorage.removeItem('currentGame');
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/home']);
     this.currentUser = null;
   }
 
@@ -72,6 +76,7 @@ export class NavMenuComponent implements OnInit {
       this.user = user;
       console.log(this.user)
       this.notificationService.success("tofi");
+      this.register = false;
     },
       error => {
         this.notificationService.handleError(error);
@@ -81,6 +86,18 @@ export class NavMenuComponent implements OnInit {
 
   goToMenu(){
     this.router.navigate(['/menu']);
+  }
+
+  goToListOfUsers(){
+    this.router.navigate(['/users']);
+  }
+
+  goToListOfStatuses(){
+    this.router.navigate(['/statuses']);
+  }
+
+  goToListOfOrders(){
+    this.router.navigate(['/orders']);
   }
 }
 

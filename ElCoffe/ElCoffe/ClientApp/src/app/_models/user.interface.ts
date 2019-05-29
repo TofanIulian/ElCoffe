@@ -7,6 +7,8 @@ export class User {
   phoneNumber?: string;
   email?: string;
   address?: string;
-  admin?: boolean;
+  isAdmin?: boolean;
+  isEmployee?: boolean;
+  isCourier?: boolean;
   //curier?: string = false;
 }

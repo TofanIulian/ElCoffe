@@ -19,6 +19,11 @@ export class ProductsService {
         return this.http.get<Product[]>(this.baseUrl + 'api/Products', { headers: headers })
     }
 
+    getAllByCategoryId (categoryId): Observable<Product[]> {
+        let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
+        return this.http.get<Product[]>(this.baseUrl + 'api/Products/ByCategory/'+ categoryId, { headers: headers })
+    }
+
     getById (id: number): Observable<Product> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
         return this.http.get<Product>(this.baseUrl + 'api/Products/' + id, { headers: headers })

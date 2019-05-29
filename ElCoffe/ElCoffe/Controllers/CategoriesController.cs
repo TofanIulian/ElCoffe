@@ -14,18 +14,6 @@ namespace ElCoffe.Controllers
     {
         private DbConn db = new DbConn();
 
-
-        [HttpPost("Verificare")]
-        public Category Verificare([FromBody]Category categ)
-        {
-            Category _categ = db.elCategories
-                      .Where(s => s.Id == categ.Id && s.Name == categ.Name)
-                      .FirstOrDefault<Category>();
-            return _categ;
-        }
-
-
-
         // GET: api/Todo
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetAll()
