@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +28,9 @@ namespace ElCoffe
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<DbConn>(options =>
+            options.UseSqlServer(Configuration.GetConnectionString("SqlServerConnectionString")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +56,7 @@ namespace ElCoffe
                     name: "default",
                     template: "{controller}/{action=Index}/{id?}");
             });
+
 
 
             app.UseSpa(spa =>
