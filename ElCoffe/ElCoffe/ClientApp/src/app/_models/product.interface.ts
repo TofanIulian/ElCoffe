@@ -6,5 +6,5 @@ export class Product {
     description?: string;
     price?: string;
     weight?: string;
-    category?: Category;
+    categoryId?: number;
   }

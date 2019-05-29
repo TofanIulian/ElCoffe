@@ -43,9 +43,9 @@ namespace ElCoffe
                    .AddJsonFile("appsettings.json")
                    .Build();
                 //var connectionString = configuration.GetConnectionString("DbCoreConnectionString");
-                //optionsBuilder.UseSqlServer("Server=.;Database=ElCoffe;Trusted_Connection=True;MultipleActiveResultSets=true");
+               optionsBuilder.UseSqlServer("Server=.;Database=ElCoffe;Trusted_Connection=True;MultipleActiveResultSets=true");
                //optionsBuilder.UseSqlServer("Server = tcp:elcoffeserver.database.windows.net, 1433; Initial Catalog = ElCoffeDB; Persist Security Info = False; User ID = guci; Password = Petrina17@3; MultipleActiveResultSets = True; Encrypt = True; Trusted_Connection = True; Connection Timeout = 30;");
-                optionsBuilder.UseSqlServer("Server=tcp:vali-deploydbserver.database.windows.net,1433;Initial Catalog=Vali-deploy_db;Persist Security Info=False;User ID=guci;Password=Petrina17@3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+               //optionsBuilder.UseSqlServer("Server=tcp:vali-deploydbserver.database.windows.net,1433;Initial Catalog=Vali-deploy_db;Persist Security Info=False;User ID=guci;Password=Petrina17@3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
     }
@@ -55,9 +55,9 @@ namespace ElCoffe
         public DbConn CreateDbContext(string[] args)
         {
             var builder = new DbContextOptionsBuilder<DbConn>();
-            //builder.UseSqlServer("Server=.;Database=ElCoffe;Trusted_Connection=True;MultipleActiveResultSets=true");
+            builder.UseSqlServer("Server=.;Database=ElCoffe;Trusted_Connection=True;MultipleActiveResultSets=true");
             //builder.UseSqlServer("Server=tcp:elcoffeserver.database.windows.net,1433;Initial Catalog=ElCoffeDB;Persist Security Info=False;User ID=guci;Password=Petrina17@3;MultipleActiveResultSets=True;Encrypt=True;Trusted_Connection=True;Connection Timeout=30;");
-            builder.UseSqlServer("Server=tcp:vali-deploydbserver.database.windows.net,1433;Initial Catalog=Vali-deploy_db;Persist Security Info=False;User ID=guci;Password=Petrina17@3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            //builder.UseSqlServer("Server=tcp:vali-deploydbserver.database.windows.net,1433;Initial Catalog=Vali-deploy_db;Persist Security Info=False;User ID=guci;Password=Petrina17@3;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             return new DbConn(builder.Options);
         }
     }

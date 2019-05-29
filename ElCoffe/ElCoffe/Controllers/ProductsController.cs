@@ -19,14 +19,16 @@ namespace ElCoffe.Controllers
         public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
             List<Product> list = new List<Product>();
-            Product p = new Product();
-            p.Name = "gigel";
-            p.Description = "gigel";
-            p.Id = 1;
-            p.Price = 10;
-            list.Add(p);
-            // return await db.Products.ToListAsync();
-            return list;
+
+            return await db.Products.ToListAsync();
+        }
+
+        [HttpGet("ByCategory/{categoryId}")]
+        public async Task<ActionResult<IEnumerable<Product>>> GetAllByCategory(long categoryId)
+        {
+            List<Product> list = new List<Product>();
+
+            return await db.Products.Where(x => x.Category.Id == categoryId).ToListAsync();
         }
 
         // GET: api/Todo/5
