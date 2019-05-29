@@ -37,6 +37,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190529181200_init.cs" />
+    <Compile Remove="Migrations\20190529181200_init.Designer.cs" />
+    <Compile Remove="Migrations\20190529183351_pre-final.cs" />
+    <Compile Remove="Migrations\20190529183351_pre-final.Designer.cs" />
+    <Compile Remove="Migrations\20190529183546_pre-final.cs" />
+    <Compile Remove="Migrations\20190529183546_pre-final.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="ClientApp\src\app\_models\user.interface.ts" />
     <None Remove="ClientApp\src\app\_services\users.service.ts" />
   </ItemGroup>

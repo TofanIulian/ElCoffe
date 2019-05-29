@@ -18,15 +18,15 @@ namespace ElCoffe.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
-            List<Product> list = new List<Product>();
-            Product p = new Product();
-            p.Name = "gigel";
-            p.Description = "gigel";
-            p.Id = 1;
-            p.Price = 10;
-            list.Add(p);
-            // return await db.Products.ToListAsync();
-            return list;
+            //List<Product> list = new List<Product>();
+            //Product p = new Product();
+            //p.Name = "gigel";
+            //p.Description = "gigel";
+            //p.Id = 1;
+            //p.Price = 10;
+            //list.Add(p);
+            return await db.Products.ToListAsync();
+            //return list;
         }
 
         // GET: api/Todo/5
