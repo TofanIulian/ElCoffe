@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ElCoffe.Controllers
 {
     [Route("api/[controller]")]
-    public class ProductsController : Controller
+    public class elProductsController : Controller
     {
         private DbConn db = new DbConn();
 
@@ -25,7 +25,7 @@ namespace ElCoffe.Controllers
             //p.Id = 1;
             //p.Price = 10;
             //list.Add(p);
-            return await db.Products.ToListAsync();
+            return await db.elProducts.ToListAsync();
             //return list;
         }
 
@@ -33,7 +33,7 @@ namespace ElCoffe.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(long id)
         {
-            var product = await db.Products.FindAsync(id);
+            var product = await db.elProducts.FindAsync(id);
 
             if (product == null)
             {
@@ -46,7 +46,7 @@ namespace ElCoffe.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> Create([FromBody]Product product)
         {
-            db.Products.Add(product);
+            db.elProducts.Add(product);
             await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
@@ -66,14 +66,14 @@ namespace ElCoffe.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(long id)
         {
-            var product = await db.Products.FindAsync(id);
+            var product = await db.elProducts.FindAsync(id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            db.Products.Remove(product);
+            db.elProducts.Remove(product);
             await db.SaveChangesAsync();
 
             return NoContent();

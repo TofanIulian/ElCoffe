@@ -7,27 +7,27 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElCoffe.Controllers
 {
-    public class OrdersController : Controller
+    public class elOrdersController : Controller
     {
-        // GET: Orders
+        // GET: elOrders
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Orders/Details/5
+        // GET: elOrders/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Orders/Create
+        // GET: elOrders/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Orders/Create
+        // POST: elOrders/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -44,13 +44,13 @@ namespace ElCoffe.Controllers
             }
         }
 
-        // GET: Orders/Edit/5
+        // GET: elOrders/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Orders/Edit/5
+        // POST: elOrders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -67,13 +67,13 @@ namespace ElCoffe.Controllers
             }
         }
 
-        // GET: Orders/Delete/5
+        // GET: elOrders/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Orders/Delete/5
+        // POST: elOrders/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)

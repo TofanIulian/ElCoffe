@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore;
 namespace ElCoffe.Controllers
 {
     [Route("api/[controller]")]
-    public class UsersController : Controller
+    public class elUsersController : Controller
     {
         private DbConn db = new DbConn();
-        //GET: Users
+        //GET: elUsers
        //[HttpGet("[action]")]
        // public int GetAll()
        // {
-       //     var users = db.Users;
+       //     var elUsers = db.elUsers;
        //     return 2;
        // }
         /*
@@ -27,7 +27,7 @@ namespace ElCoffe.Controllers
         [HttpPost("Login")]
         public User Login([FromBody]User user)
         {
-            User _user = db.Users
+            User _user = db.elUsers
                       .Where(s => s.Username == user.Username && s.Password == user.Password)
                       .FirstOrDefault<User>();
             return _user;
@@ -39,14 +39,14 @@ namespace ElCoffe.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<User>>> GetAll()
         {
-            return await db.Users.ToListAsync();
+            return await db.elUsers.ToListAsync();
         }
 
         // GET: api/Todo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<User>> GetUser(long id)
         {
-            var user = await db.Users.FindAsync(id);
+            var user = await db.elUsers.FindAsync(id);
 
             if (user == null)
             {
@@ -59,7 +59,7 @@ namespace ElCoffe.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> Create([FromBody]User user)
         {
-            db.Users.Add(user);
+            db.elUsers.Add(user);
             await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
@@ -84,21 +84,21 @@ namespace ElCoffe.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(long id)
         {
-            var user = await db.Users.FindAsync(id);
+            var user = await db.elUsers.FindAsync(id);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
+            db.elUsers.Remove(user);
             await db.SaveChangesAsync();
 
             return NoContent();
         }
 
         /*
-        // POST: Users/Create
+        // POST: elUsers/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(User user)
@@ -108,7 +108,7 @@ namespace ElCoffe.Controllers
                 // TODO: Add insert logic here
                 if (ModelState.IsValid)
                 {
-                    db.Users.Add(user);
+                    db.elUsers.Add(user);
                     db.SaveChanges();
                     return RedirectToAction(nameof(GetAll));
                 }
@@ -121,7 +121,7 @@ namespace ElCoffe.Controllers
             return View(user);
         }
 
-        // POST: Users/Edit/5
+        // POST: elUsers/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id,User user)
@@ -145,14 +145,14 @@ namespace ElCoffe.Controllers
             return View(user);
         }
 
-        // POST: Users/Delete/5
+        // POST: elUsers/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
                 // TODO: Add delete logic here
-                User user = db.Users.Find(id);
-                db.Users.Remove(user);
+                User user = db.elUsers.Find(id);
+                db.elUsers.Remove(user);
                 db.SaveChanges();
                 return RedirectToAction(nameof(GetAll));
         }
