@@ -18,14 +18,14 @@ namespace ElCoffe.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetAll()
         {
-            return await db.Categories.ToListAsync();
+            return await db.elCategories.ToListAsync();
         }
 
         // GET: api/Todo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> GetCategory(long id)
         {
-            var categ = await db.Categories.FindAsync(id);
+            var categ = await db.elCategories.FindAsync(id);
 
             if (categ == null)
             {
@@ -38,7 +38,7 @@ namespace ElCoffe.Controllers
         [HttpPost]
         public async Task<ActionResult<Category>> Create([FromBody]Category categ)
         {
-            db.Categories.Add(categ);
+            db.elCategories.Add(categ);
             await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetCategory), new { id = categ.Id }, categ);
@@ -63,14 +63,14 @@ namespace ElCoffe.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCategory(long id)
         {
-            var categ = await db.Categories.FindAsync(id);
+            var categ = await db.elCategories.FindAsync(id);
 
             if (categ == null)
             {
                 return NotFound();
             }
 
-            db.Categories.Remove(categ);
+            db.elCategories.Remove(categ);
             await db.SaveChangesAsync();
 
             return NoContent();

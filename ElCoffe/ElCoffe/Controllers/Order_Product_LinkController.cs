@@ -17,14 +17,14 @@ namespace ElCoffe.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order_Product_Link>>> GetAll()
         {
-            return await db.Order_Product_Links.ToListAsync();
+            return await db.elOrder_Product_Links.ToListAsync();
         }
 
         // GET: api/Todo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Order_Product_Link>> GetOrder_Product_Link(long id)
         {
-            var opl = await db.Order_Product_Links.FindAsync(id);
+            var opl = await db.elOrder_Product_Links.FindAsync(id);
 
             if (opl == null)
             {
@@ -37,7 +37,7 @@ namespace ElCoffe.Controllers
         [HttpPost]
         public async Task<ActionResult<Order_Product_Link>> Create([FromBody]Order_Product_Link opl)
         {
-            db.Order_Product_Links.Add(opl);
+            db.elOrder_Product_Links.Add(opl);
             await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetOrder_Product_Link), new { id = opl.Id }, opl);
@@ -57,14 +57,14 @@ namespace ElCoffe.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrder_Product_Link(long id)
         {
-            var opl = await db.Order_Product_Links.FindAsync(id);
+            var opl = await db.elOrder_Product_Links.FindAsync(id);
 
             if (opl == null)
             {
                 return NotFound();
             }
 
-            db.Order_Product_Links.Remove(opl);
+            db.elOrder_Product_Links.Remove(opl);
             await db.SaveChangesAsync();
 
             return NoContent();

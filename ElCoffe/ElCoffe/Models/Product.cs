@@ -13,6 +13,7 @@ namespace ElCoffe.Models
         public string Description { get; set; }
         public float Price { get; set; }
         public float Weight { get; set; }
+        [ForeignKey("CategoryId")]
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
     }

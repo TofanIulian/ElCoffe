@@ -4,14 +4,16 @@ using ElCoffe;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ElCoffe.Migrations
 {
     [DbContext(typeof(DbConn))]
-    partial class DbConnModelSnapshot : ModelSnapshot
+    [Migration("20190529194749_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,15 +46,15 @@ namespace ElCoffe.Migrations
 
                     b.Property<string>("Details");
 
-                    b.Property<int>("StatusId");
+                    b.Property<int>("StatusID");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserID");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StatusId");
+                    b.HasIndex("StatusID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("elOrders");
                 });
@@ -63,17 +65,17 @@ namespace ElCoffe.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("OrderId");
+                    b.Property<int>("OrderID");
 
-                    b.Property<int>("ProductId");
+                    b.Property<int>("ProductID");
 
                     b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
+                    b.HasIndex("OrderID");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("ProductID");
 
                     b.ToTable("elOrder_Product_Links");
                 });
@@ -84,7 +86,7 @@ namespace ElCoffe.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int>("CategoryID");
 
                     b.Property<string>("Description");
 
@@ -96,7 +98,7 @@ namespace ElCoffe.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("CategoryID");
 
                     b.ToTable("elProducts");
                 });
@@ -113,11 +115,11 @@ namespace ElCoffe.Migrations
 
                     b.Property<int>("PeopleNumber");
 
-                    b.Property<int>("UserId");
+                    b.Property<int>("UserID");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("elReservations");
                 });
@@ -143,15 +145,11 @@ namespace ElCoffe.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<bool>("Admin");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
-
-                    b.Property<bool>("IsAdmin");
-
-                    b.Property<bool>("IsCourier");
-
-                    b.Property<bool>("IsEmployee");
 
                     b.Property<string>("LastName");
 
@@ -170,12 +168,12 @@ namespace ElCoffe.Migrations
                 {
                     b.HasOne("ElCoffe.Models.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId")
+                        .HasForeignKey("StatusID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ElCoffe.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -183,12 +181,12 @@ namespace ElCoffe.Migrations
                 {
                     b.HasOne("ElCoffe.Models.Order", "Order")
                         .WithMany()
-                        .HasForeignKey("OrderId")
+                        .HasForeignKey("OrderID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ElCoffe.Models.Product", "Product")
                         .WithMany()
-                        .HasForeignKey("ProductId")
+                        .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -196,7 +194,7 @@ namespace ElCoffe.Migrations
                 {
                     b.HasOne("ElCoffe.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -204,7 +202,7 @@ namespace ElCoffe.Migrations
                 {
                     b.HasOne("ElCoffe.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
+                        .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

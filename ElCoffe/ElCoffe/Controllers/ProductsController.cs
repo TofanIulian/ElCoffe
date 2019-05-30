@@ -20,7 +20,7 @@ namespace ElCoffe.Controllers
         {
             List<Product> list = new List<Product>();
 
-            return await db.Products.ToListAsync();
+            return await db.elProducts.ToListAsync();
         }
 
         [HttpGet("ByCategory/{categoryId}")]
@@ -28,14 +28,14 @@ namespace ElCoffe.Controllers
         {
             List<Product> list = new List<Product>();
 
-            return await db.Products.Where(x => x.Category.Id == categoryId).ToListAsync();
+            return await db.elProducts.Where(x => x.Category.Id == categoryId).ToListAsync();
         }
 
         // GET: api/Todo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            var product = await db.Products.FindAsync(id);
+            var product = await db.elProducts.FindAsync(id);
 
             if (product == null)
             {
@@ -48,7 +48,7 @@ namespace ElCoffe.Controllers
         [HttpPost]
         public async Task<ActionResult<Product>> Create([FromBody]Product product)
         {
-            db.Products.Add(product);
+            db.elProducts.Add(product);
             await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
@@ -68,14 +68,14 @@ namespace ElCoffe.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(long id)
         {
-            var product = await db.Products.FindAsync(id);
+            var product = await db.elProducts.FindAsync(id);
 
             if (product == null)
             {
                 return NotFound();
             }
 
-            db.Products.Remove(product);
+            db.elProducts.Remove(product);
             await db.SaveChangesAsync();
 
             return NoContent();

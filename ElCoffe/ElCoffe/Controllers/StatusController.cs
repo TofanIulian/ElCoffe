@@ -17,14 +17,14 @@ namespace ElCoffe.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Status>>> GetAll()
         {
-            return await db.Statuses.ToListAsync();
+            return await db.elStatuses.ToListAsync();
         }
 
         // GET: api/Todo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Status>> GetStatus(long id)
         {
-            var sts = await db.Statuses.FindAsync(id);
+            var sts = await db.elStatuses.FindAsync(id);
 
             if (sts == null)
             {
@@ -37,7 +37,7 @@ namespace ElCoffe.Controllers
         [HttpPost]
         public async Task<ActionResult<Status>> Create([FromBody]Status sts)
         {
-            db.Statuses.Add(sts);
+            db.elStatuses.Add(sts);
             await db.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetStatus), new { id = sts.Id }, sts);
@@ -57,14 +57,14 @@ namespace ElCoffe.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteStatus(long id)
         {
-            var sts = await db.Statuses.FindAsync(id);
+            var sts = await db.elStatuses.FindAsync(id);
 
             if (sts == null)
             {
                 return NotFound();
             }
 
-            db.Statuses.Remove(sts);
+            db.elStatuses.Remove(sts);
             await db.SaveChangesAsync();
 
             return NoContent();
