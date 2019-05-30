@@ -33,7 +33,7 @@ namespace ElCoffe.Controllers
 
         // GET: api/Todo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(long id)
+        public async Task<ActionResult<Product>> GetProduct(int id)
         {
             var product = await db.Products.FindAsync(id);
 

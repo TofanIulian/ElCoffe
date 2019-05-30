@@ -44,7 +44,7 @@ namespace ElCoffe.Controllers
 
         // GET: api/Todo/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(long id)
+        public async Task<ActionResult<User>> GetUser(int id)
         {
             var user = await db.Users.FindAsync(id);
 

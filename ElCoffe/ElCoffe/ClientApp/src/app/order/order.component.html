@@ -1,19 +1,45 @@
 <div class='body-content'>
-  
-    <button class="btn btn-primary" (click)="sendOrder()">Send Order</button>
-    <table style="width: 100%" mat-table [dataSource]="products" class="mat-elevation-z8">
-  
-      <ng-container matColumnDef="Price">
-        <th mat-header-cell *matHeaderCellDef> Price </th>
-        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+
+  <button class="btn btn-primary" (click)="openModal(newOrderModal)">Send Order</button>
+  <table style="width: 100%" mat-table [dataSource]="products" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Product Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <div style="padding: 15px">Total Price : {{totalPrice}}</div>
+</div>
+
+<ng-template #newOrderModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">New Order</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+  <div class="modal-body">
+    <form #form="ngForm">
+      <div *ngIf="newOrder">
+        <mat-form-field>
+          <input matInput placeholder="Address" name="name" [(ngModel)]="newOrder.address" type="text">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Details" name="description" [(ngModel)]="newOrder.details" required type="text">
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" [disabled]="form.invalid" (click)="sendOrder(); modal.close('Close click')">Send Order</button>
+    <button type="button" class="btn btn-danger" (click)="modal.close('Close click')">Cloase</button>
+  </div>
+</ng-template>

@@ -99,6 +99,14 @@ export class NavMenuComponent implements OnInit {
   goToListOfOrders(){
     this.router.navigate(['/orders']);
   }
+
+  goToMyOrder(){
+    this.router.navigate(['/order']);
+  }
+
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
 }
 
 

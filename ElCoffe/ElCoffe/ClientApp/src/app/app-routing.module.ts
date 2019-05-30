@@ -10,6 +10,7 @@ import { AuthGuardService as AuthGuard } from './auth/auth-guard.service';
 import { UsersComponent } from './users/users.component';
 import { OrdersComponent } from './orders/orders.component';
 import { StatusesComponent } from './statuses/statuses.component';
+import { OrderComponent } from './order/order.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'counter', component: CounterComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'users', component: UsersComponent, canActivate: [AuthGuard]},
   { path: 'statuses', component: StatusesComponent, canActivate: [AuthGuard]},
   { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
+  { path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent },
 ];

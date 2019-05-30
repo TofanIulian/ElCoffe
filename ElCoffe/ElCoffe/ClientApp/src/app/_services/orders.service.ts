@@ -7,9 +7,11 @@ import { Order } from '../_models/order.interface';
 
 export class OrdersService {
 
-    @Inject('BASE_URL') baseUrl: string
+    baseUrl: string;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient,@Inject('BASE_URL') baseUrl: string) {
+        this.baseUrl = baseUrl;
+    }
 
     getAll (): Observable<Order[]> {
         let headers = new HttpHeaders({ 'Content-Type': 'application/json'});
