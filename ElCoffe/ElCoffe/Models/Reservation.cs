@@ -12,8 +12,8 @@ namespace ElCoffe.Models
         public int PeopleNumber { get; set; }
         public DateTime Date { get; set; }
         public string Details { get; set; }
-        [ForeignKey("UserID")]
-        public int UserID { get; set; }
+        [ForeignKey("UserId")]
+        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }

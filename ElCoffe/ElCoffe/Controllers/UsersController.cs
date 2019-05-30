@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ElCoffe.Controllers
 {
     [Route("api/[controller]")]
-    public class elUsersController : Controller
+    public class UsersController : Controller
     {
         private DbConn db = new DbConn();
         //GET: elUsers

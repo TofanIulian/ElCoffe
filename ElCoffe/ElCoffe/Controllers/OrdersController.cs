@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ElCoffe.Controllers
 {
-    public class elOrdersController : Controller
+    public class OrdersController : Controller
     {
         // GET: elOrders
         public ActionResult Index()

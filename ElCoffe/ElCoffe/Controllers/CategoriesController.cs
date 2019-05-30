@@ -10,7 +10,7 @@ namespace ElCoffe.Controllers
 {
 
     [Route("api/[controller]")]
-    public class elCategoriesController : Controller
+    public class CategoriesController : Controller
     {
         private DbConn db = new DbConn();
 

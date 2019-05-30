@@ -4,18 +4,20 @@ using ElCoffe;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ElCoffe.Migrations
 {
     [DbContext(typeof(DbConn))]
-    partial class DbConnModelSnapshot : ModelSnapshot
+    [Migration("20190526182558_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -31,7 +33,7 @@ namespace ElCoffe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("elCategories");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.Order", b =>
@@ -44,9 +46,9 @@ namespace ElCoffe.Migrations
 
                     b.Property<string>("Details");
 
-                    b.Property<int>("StatusId");
+                    b.Property<int?>("StatusId");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
@@ -54,28 +56,7 @@ namespace ElCoffe.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("elOrders");
-                });
-
-            modelBuilder.Entity("ElCoffe.Models.Order_Product_Link", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("OrderId");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("elOrder_Product_Links");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.Product", b =>
@@ -84,11 +65,13 @@ namespace ElCoffe.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CategoryId");
+                    b.Property<int?>("CategoryId");
 
                     b.Property<string>("Description");
 
                     b.Property<string>("Name");
+
+                    b.Property<int?>("OrderId");
 
                     b.Property<float>("Price");
 
@@ -98,7 +81,9 @@ namespace ElCoffe.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("elProducts");
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.Reservation", b =>
@@ -113,13 +98,13 @@ namespace ElCoffe.Migrations
 
                     b.Property<int>("PeopleNumber");
 
-                    b.Property<int>("UserId");
+                    b.Property<int?>("UserId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("elReservations");
+                    b.ToTable("Reservations");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.Status", b =>
@@ -132,7 +117,7 @@ namespace ElCoffe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("elStatuses");
+                    b.ToTable("Statuses");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.User", b =>
@@ -163,49 +148,36 @@ namespace ElCoffe.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("elUsers");
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.Order", b =>
                 {
                     b.HasOne("ElCoffe.Models.Status", "Status")
                         .WithMany()
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("StatusId");
 
                     b.HasOne("ElCoffe.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ElCoffe.Models.Order_Product_Link", b =>
-                {
-                    b.HasOne("ElCoffe.Models.Order", "Order")
-                        .WithMany()
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ElCoffe.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.Product", b =>
                 {
                     b.HasOne("ElCoffe.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("ElCoffe.Models.Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("ElCoffe.Models.Reservation", b =>
                 {
                     b.HasOne("ElCoffe.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }
